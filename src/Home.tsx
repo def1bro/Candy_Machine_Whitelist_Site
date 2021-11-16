@@ -19,13 +19,20 @@ import {
   shortenAddress,
 } from "./candy-machine";
 
+
+const MainDiv = styled.div`
+  font-family: "sans-serif";
+  font-weight: 500`;
+
 const ConnectButton = styled(WalletDialogButton)``;
 
 const CounterText = styled.span``; // add your styles here
 
 const MintContainer = styled.div``; // add your styles here
 
-const MintButton = styled(Button)``; // add your styles here
+const MintButton = styled(Button)`
+  background-color: #F2E235;
+`; // add your styles here
 
 export interface HomeProps {
   candyMachineId: anchor.web3.PublicKey;
@@ -151,7 +158,7 @@ const Home = (props: HomeProps) => {
       if (!error.message) {
         if (error.message.indexOf("0x138")) {
         } else if (error.message.indexOf("0x137")) {
-          message = `SOLD OUT!`;
+          message = `SOLD OUT! No more Bastards left :(`;
         } else if (error.message.indexOf("0x135")) {
           message = `Insufficient funds to mint. Please fund your wallet.`;
         }
@@ -209,6 +216,7 @@ const Home = (props: HomeProps) => {
   ]);
 
   return (
+      <MainDiv>
     <main>
       {wallet && (
         <p>Wallet {shortenAddress(wallet.publicKey.toBase58() || "")}</p>
@@ -216,11 +224,11 @@ const Home = (props: HomeProps) => {
 
       {wallet && <p>Balance: {(balance || 0).toLocaleString()} SOL</p>}
 
-      {wallet && <p>Total Available: {itemsAvailable}</p>}
+      {wallet && <p>Total Bastards Supply: {itemsAvailable}</p>}
 
-      {wallet && <p>Redeemed: {itemsRedeemed}</p>}
+      {wallet && <p>Redeemed: {itemsRedeemed} Bastards</p>}
 
-      {wallet && <p>Remaining: {itemsRemaining}</p>}
+      {wallet && <p>Remaining Bastards: {itemsRemaining}/6969</p>}
 
       <MintContainer>
         {!wallet ? (
@@ -264,6 +272,7 @@ const Home = (props: HomeProps) => {
         </Alert>
       </Snackbar>
     </main>
+      </MainDiv>
   );
 };
 

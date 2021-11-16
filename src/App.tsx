@@ -93,6 +93,7 @@ const App = () => {
           <ConnectionProvider endpoint={endpoint}>
             <WalletProvider wallets={wallets} autoConnect={true}>
               <WalletDialogProvider>
+                  <div className={'home'}>
                 <Home
                   candyMachineId={candyMachineId}
                   config={config}
@@ -101,6 +102,7 @@ const App = () => {
                   treasury={treasury}
                   txTimeout={txTimeout}
                 />
+                  </div>
               </WalletDialogProvider>
             </WalletProvider>
           </ConnectionProvider>
