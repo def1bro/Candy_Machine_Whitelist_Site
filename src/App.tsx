@@ -69,9 +69,10 @@ const theme = createTheme({
 });
 
 const App = () => {
-  const endpoint = useMemo(() => clusterApiUrl(network), []);
+    //const endpoint = useMemo(() => clusterApiUrl(network), []);
+    const endpoint = process.env.REACT_APP_SOLANA_RPC_HOST!;
 
-  const wallets = useMemo(
+    const wallets = useMemo(
     () => [
         getPhantomWallet(),
         getSlopeWallet(),
