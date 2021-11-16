@@ -88,16 +88,20 @@ const Home = (props: HomeProps) => {
   const onMint = async () => {
     try {
       const WHITELIST_ENABLED = process.env.REACT_APP_WHITELIST_ENABLED;
-      let res = await fetch(`${api_url}/whitelisted/member/${(wallet as anchor.Wallet).publicKey.toString()}`, {method: "GET"})
-      const res_json = await res.json()
-      const res_num = await JSON.parse(JSON.stringify(res_json)).reserve //The number  of reserves the user has left
-      if(WHITELIST_ENABLED && !isWhitelisted){
-        throw new Error("You are not whitelisted");
+      let res_num=10000;
+      if(WHITELIST_ENABLED){
+        let res = await fetch(`${api_url}/whitelisted/member/${(wallet as anchor.Wallet).publicKey.toString()}`, {method: "GET"})
+        const res_json = await res.json()
+        res_num = await JSON.parse(JSON.stringify(res_json)).reserve //The number  of reserves the user has left
+        if(!isWhitelisted){
+          throw new Error("You are not whitelisted");
+        }
+        if(res_num - 1 < 0){
+          console.log("confirmed")
+          throw new Error("Not enough reserves");
+        }
       }
-      if(WHITELIST_ENABLED && res_num - 1 < 0){
-        console.log("confirmed")
-        throw new Error("Not enough reserves");
-      }
+
       setIsMinting(true);
       if (wallet && candyMachine?.program) {
         const mintTxId = await mintOneToken(
@@ -132,7 +136,6 @@ const Home = (props: HomeProps) => {
               body: to_send})
             console.log("Updated Reserves for user");
           }
-
 
         } else {
           setAlertState({
@@ -185,12 +188,15 @@ const Home = (props: HomeProps) => {
       if (wallet) {
         const balance = await props.connection.getBalance(wallet.publicKey);
         setBalance(balance / LAMPORTS_PER_SOL);
-        const data = await fetch(`${api_url}/whitelisted/member/${(wallet as anchor.Wallet).publicKey.toString()}`)
-        if(data.status.toString() !== "404"){
-          SetWhitelisted(true)
-        }
-        else{
-          console.log("not found")
+        const WHITELIST_ENABLED = process.env.REACT_APP_WHITELIST_ENABLED;
+        if(WHITELIST_ENABLED){
+          const data = await fetch(`${api_url}/whitelisted/member/${(wallet as anchor.Wallet).publicKey.toString()}`)
+          if(data.status.toString() !== "404"){
+            SetWhitelisted(true)
+          }
+          else{
+            console.log("not found")
+          }
         }
       }
     })();

@@ -36,7 +36,9 @@ const candyMachineId = new anchor.web3.PublicKey(
 
 const network = process.env.REACT_APP_SOLANA_NETWORK as WalletAdapterNetwork;
 
-const rpcHost = process.env.REACT_APP_SOLANA_RPC_HOST!;
+const random = Math.floor(Math.random() * 3);
+const rpcHost = random === 0 ? process.env.REACT_APP_SOLANA_RPC_HOST_FIRST! : (random ===1 ? process.env.REACT_APP_SOLANA_RPC_HOST_SECOND! :process.env.REACT_APP_SOLANA_RPC_HOST_THIRD!);
+
 const connection = new anchor.web3.Connection(rpcHost);
 
 const startDateSeed = parseInt(process.env.REACT_APP_CANDY_START_DATE!, 10);
@@ -70,7 +72,9 @@ const theme = createTheme({
 
 const App = () => {
     //const endpoint = useMemo(() => clusterApiUrl(network), []);
-    const endpoint = process.env.REACT_APP_SOLANA_RPC_HOST!;
+    const random = Math.floor(Math.random() * 3);
+    const endpoint = random === 0 ? process.env.REACT_APP_SOLANA_RPC_HOST_FIRST! : (random ===1 ? process.env.REACT_APP_SOLANA_RPC_HOST_SECOND! :process.env.REACT_APP_SOLANA_RPC_HOST_THIRD!);
+    console.log(random);
 
     const wallets = useMemo(
     () => [
