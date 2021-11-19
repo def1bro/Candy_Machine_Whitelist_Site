@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Countdown from "react-countdown";
 import { Button, CircularProgress, Snackbar } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
+import yn from 'yn';
 
 import * as anchor from "@project-serum/anchor";
 
@@ -94,7 +95,7 @@ const Home = (props: HomeProps) => {
 
   const onMint = async () => {
     try {
-      const WHITELIST_ENABLED = process.env.REACT_APP_WHITELIST_ENABLED;
+      const WHITELIST_ENABLED = yn(process.env.REACT_APP_WHITELIST_ENABLED);
       let res_num=10000;
       if(WHITELIST_ENABLED){
         let res = await fetch(`${api_url}/whitelisted/member/${(wallet as anchor.Wallet).publicKey.toString()}`, {method: "GET"})
@@ -195,7 +196,7 @@ const Home = (props: HomeProps) => {
       if (wallet) {
         const balance = await props.connection.getBalance(wallet.publicKey);
         setBalance(balance / LAMPORTS_PER_SOL);
-        const WHITELIST_ENABLED = process.env.REACT_APP_WHITELIST_ENABLED;
+        const WHITELIST_ENABLED =  yn(process.env.REACT_APP_WHITELIST_ENABLED);
         if(WHITELIST_ENABLED){
           const data = await fetch(`${api_url}/whitelisted/member/${(wallet as anchor.Wallet).publicKey.toString()}`)
           if(data.status.toString() !== "404"){
@@ -235,7 +236,7 @@ const Home = (props: HomeProps) => {
           <ConnectButton>Connect Wallet</ConnectButton>
         ) : (
           <MintButton
-            disabled={!isWhitelisted || isSoldOut || isMinting || !isActive} //change happened here
+            disabled={(  (yn(process.env.REACT_APP_WHITELIST_ENABLED) && !isWhitelisted) || isSoldOut || isMinting || !isActive )} //change happened here
             onClick={onMint}
             variant="contained"
           >
