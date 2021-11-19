@@ -1,5 +1,7 @@
 import "./App.css";
 import { useMemo } from "react";
+import { ReactComponent as MintPrizes } from './mint-prizes.svg';
+import { ReactComponent as BackButton } from './back-button.svg';
 
 import Home from "./Home";
 
@@ -93,6 +95,8 @@ const App = () => {
           <ConnectionProvider endpoint={endpoint}>
             <WalletProvider wallets={wallets} autoConnect={true}>
               <WalletDialogProvider>
+                  <BackButton/>
+                  <div className = {'mintPrizes'}><MintPrizes/></div>
                   <div className={'home'}>
                 <Home
                   candyMachineId={candyMachineId}

@@ -218,18 +218,17 @@ const Home = (props: HomeProps) => {
 
   return (
       <MainDiv>
+
     <main>
       {wallet && (
         <p>Wallet {shortenAddress(wallet.publicKey.toBase58() || "")}</p>
       )}
 
       {wallet && <p>Balance: {(balance || 0).toLocaleString()} SOL</p>}
-
       {wallet && <p>Total Bastards Supply: {itemsAvailable}</p>}
-
+{/*
       {wallet && <p>Redeemed: {itemsRedeemed} Bastards</p>}
-
-      {wallet && <p>Remaining Bastards: {itemsRemaining}/6969</p>}
+      {wallet && <p>Remaining Bastards: {itemsRemaining}/6969</p>}*/}
 
       <MintContainer>
         {!wallet ? (
