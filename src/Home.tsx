@@ -264,7 +264,6 @@ const Home = (props: HomeProps) => {
         )}
       </MintContainer>
 
-
       <Snackbar
         open={alertState.open}
         autoHideDuration={6000}
