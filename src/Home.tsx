@@ -187,6 +187,7 @@ const Home = (props: HomeProps) => {
         const balance = await props.connection.getBalance(wallet.publicKey);
         setBalance(balance / LAMPORTS_PER_SOL);
       }
+
       setIsMinting(false);
       refreshCandyMachineState();
     }
