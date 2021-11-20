@@ -96,6 +96,7 @@ const Home = (props: HomeProps) => {
   const onMint = async () => {
     try {
       const WHITELIST_ENABLED = yn(process.env.REACT_APP_WHITELIST_ENABLED);
+      console.log(WHITELIST_ENABLED);
       let res_num=10000;
       if(WHITELIST_ENABLED){
         let res = await fetch(`${api_url}/whitelisted/member/${(wallet as anchor.Wallet).publicKey.toString()}`, {method: "GET"})
@@ -159,13 +160,13 @@ const Home = (props: HomeProps) => {
       if (!error.message) {
         if (error.message.indexOf("0x138")) {
         } else if (error.message.indexOf("0x137")) {
-          message = `SOLD OUT! No more Bastards left :(`;
+          message = `High traffic :( Server will be up soon`;
         } else if (error.message.indexOf("0x135")) {
           message = `Insufficient funds to mint. Please fund your wallet.`;
         }
       } else {
         if (error.code === 311) {
-          message = `SOLD OUT!`;
+          message = `High traffic :( Server will be up soon`;
           setIsSoldOut(true);
         } else if (error.code === 312) {
           message = `Minting period hasn't started yet.`;
