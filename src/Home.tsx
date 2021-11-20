@@ -161,13 +161,13 @@ const Home = (props: HomeProps) => {
       if (!error.message) {
         if (error.message.indexOf("0x138")) {
         } else if (error.message.indexOf("0x137")) {
-          message = `High traffic :( Server will be up soon`;
+          message = `Minting is temporarly on hold, try again shortly`;
         } else if (error.message.indexOf("0x135")) {
           message = `Insufficient funds to mint. Please fund your wallet.`;
         }
       } else {
         if (error.code === 311) {
-          message = `High traffic :( Server will be up soon`;
+          message = `Minting is temporarly on hold, try again shortly`;
           setIsSoldOut(true);
         } else if (error.code === 312) {
           message = `Minting period hasn't started yet.`;
@@ -245,7 +245,7 @@ const Home = (props: HomeProps) => {
             variant="contained"
           >
             {isSoldOut ? (
-              "High traffic :( will be up soon"
+              "Minting is temporarly on hold, try again shortly"
             ) : isActive ? (
               isMinting ? (
                 <CircularProgress />
