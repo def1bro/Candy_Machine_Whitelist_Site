@@ -154,6 +154,7 @@ const Home = (props: HomeProps) => {
           });
         }
       }
+
     } catch (error: any) {
       // TODO: blech:
       let message = error.message || "Minting failed! Please try again!";
