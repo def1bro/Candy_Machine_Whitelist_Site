@@ -243,7 +243,7 @@ const Home = (props: HomeProps) => {
             variant="contained"
           >
             {isSoldOut ? (
-              "SOLD OUT"
+              "High traffic :( will be up soon"
             ) : isActive ? (
               isMinting ? (
                 <CircularProgress />
