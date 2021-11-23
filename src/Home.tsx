@@ -233,6 +233,7 @@ const Home = (props: HomeProps) => {
       {wallet && <p>Redeemed: <b>  {itemsRedeemed + 2000} Bastards </b></p>}
       {wallet && <p>Remaining Bastards: <b> {itemsRemaining + 369}/3369 </b></p>}
 
+
       <MintContainer>
         {!wallet ? (
           <ConnectButton>Connect Wallet</ConnectButton>
