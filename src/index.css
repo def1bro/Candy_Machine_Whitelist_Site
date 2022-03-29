@@ -1,20 +1,12 @@
 body {
+  background: #000000;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  #background-color: #303030;
-  color: #FFFFFF;
 }
-html{
-  background-image: url("https://bastard-assets.s3.eu-west-2.amazonaws.com/assets/website-background-dark.png");
-  background-attachment: scroll;
-  background-position: center;
-  overflow-x: hidden;
-}
-
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
